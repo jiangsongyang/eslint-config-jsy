@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-jsy",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "Self-use ESLint rules",
   "main": "index.js",
   "scripts": {
@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/jiangsongyang/eslint-config-jsy/issues"
   },
-  "homepage": "https://github.com/jiangsongyang/eslint-config-jsy#readme"
+  "homepage": "https://github.com/jiangsongyang/eslint-config-jsy#readme",
+  "dependencies": {
+    "eslint-config-recommended": "^4.1.0",
+    "eslint-plugin-jsonc": "^2.3.1",
+    "eslint-plugin-markdown": "^3.0.0",
+    "eslint-plugin-yml": "^1.1.0"
+  }
 }

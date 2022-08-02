@@ -6,13 +6,13 @@ module.exports = {
   },
   reportUnusedDisableDirectives: true,
   extends: [
-    './standard',
+    'standard',
     'plugin:import/recommended',
-    'plugin:eslint-comments/recommended',
     'plugin:jsonc/recommended-with-jsonc',
     'plugin:yml/standard',
     'plugin:markdown/recommended',
   ],
+  parser: '@typescript-eslint/parser',
   ignorePatterns: [
     '*.min.*',
     '*.d.ts',
@@ -31,10 +31,7 @@ module.exports = {
     '!.vitepress',
     '!.vscode',
   ],
-  plugins: [
-    'html',
-    'unicorn',
-  ],
+  plugins: ['@typescript-eslint'],
   settings: {
     'import/resolver': {
       node: { extensions: ['.js', '.mjs'] },
@@ -49,11 +46,20 @@ module.exports = {
         'jsonc/comma-dangle': ['error', 'never'],
         'jsonc/comma-style': ['error', 'last'],
         'jsonc/indent': ['error', 2],
-        'jsonc/key-spacing': ['error', { beforeColon: false, afterColon: true }],
+        'jsonc/key-spacing': [
+          'error',
+          { beforeColon: false, afterColon: true },
+        ],
         'jsonc/no-octal-escape': 'error',
-        'jsonc/object-curly-newline': ['error', { multiline: true, consistent: true }],
+        'jsonc/object-curly-newline': [
+          'error',
+          { multiline: true, consistent: true },
+        ],
         'jsonc/object-curly-spacing': ['error', 'always'],
-        'jsonc/object-property-newline': ['error', { allowMultiplePropertiesPerLine: true }],
+        'jsonc/object-property-newline': [
+          'error',
+          { allowMultiplePropertiesPerLine: true },
+        ],
       },
     },
     {
@@ -123,11 +129,7 @@ module.exports = {
           },
           {
             pathPattern: '^exports.*$',
-            order: [
-              'types',
-              'require',
-              'import',
-            ],
+            order: ['types', 'require', 'import'],
           },
         ],
       },
@@ -184,26 +186,30 @@ module.exports = {
     'import/no-absolute-path': 'off',
 
     // Common
-    'semi': ['error', 'never'],
-    'curly': ['error', 'multi-or-nest', 'consistent'],
-    'quotes': ['error', 'single'],
+    semi: ['error', 'never'],
+    curly: ['error', 'multi-or-nest', 'consistent'],
+    quotes: ['error', 'single'],
     'quote-props': ['error', 'consistent-as-needed'],
     'no-unused-vars': 'warn',
     'no-param-reassign': 'off',
     'array-bracket-spacing': ['error', 'never'],
     'brace-style': ['error', 'stroustrup', { allowSingleLine: true }],
     'block-spacing': ['error', 'always'],
-    'camelcase': 'off',
+    camelcase: 'off',
     'comma-spacing': ['error', { before: false, after: true }],
     'comma-style': ['error', 'last'],
     'comma-dangle': ['error', 'always-multiline'],
     'no-constant-condition': 'warn',
     'no-debugger': 'error',
-    'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-cond-assign': ['error', 'always'],
     'func-call-spacing': ['off', 'never'],
     'key-spacing': ['error', { beforeColon: false, afterColon: true }],
-    'indent': ['error', 2, { SwitchCase: 1, VariableDeclarator: 1, outerIIFEBody: 1 }],
+    'multiline-ternary': ['off'],
+    indent: [
+      'error',
+      2,
+      { SwitchCase: 1, VariableDeclarator: 1, outerIIFEBody: 1 },
+    ],
     'no-restricted-syntax': [
       'error',
       'DebuggerStatement',
@@ -253,24 +259,28 @@ module.exports = {
     'template-curly-spacing': 'error',
     'arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
     'generator-star-spacing': 'off',
-    'spaced-comment': ['error', 'always', {
-      line: {
-        markers: ['/'],
-        exceptions: ['/', '#'],
+    'spaced-comment': [
+      'error',
+      'always',
+      {
+        line: {
+          markers: ['/'],
+          exceptions: ['/', '#'],
+        },
+        block: {
+          markers: ['!'],
+          exceptions: ['*'],
+          balanced: true,
+        },
       },
-      block: {
-        markers: ['!'],
-        exceptions: ['*'],
-        balanced: true,
-      },
-    }],
+    ],
 
     // best-practice
     'array-callback-return': 'error',
     'block-scoped-var': 'error',
     'consistent-return': 'off',
-    'complexity': ['off', 11],
-    'eqeqeq': ['error', 'smart'],
+    complexity: ['off', 11],
+    eqeqeq: ['error', 'smart'],
     'no-alert': 'warn',
     'no-case-declarations': 'error',
     'no-multi-spaces': 'error',
@@ -283,31 +293,10 @@ module.exports = {
     'no-return-assign': 'off',
     'operator-linebreak': ['error', 'before'],
 
-    // unicorns
-    // Pass error message when throwing errors
-    'unicorn/error-message': 'error',
-    // Uppercase regex escapes
-    'unicorn/escape-case': 'error',
-    // Array.isArray instead of instanceof
-    'unicorn/no-instanceof-array': 'error',
-    // Prevent deprecated `new Buffer()`
-    'unicorn/no-new-buffer': 'error',
-    // Keep regex literals safe!
-    'unicorn/no-unsafe-regex': 'off',
-    // Lowercase number formatting for octal, hex, binary (0x1'error' instead of 0X1'error')
-    'unicorn/number-literal-case': 'error',
-    // includes over indexOf when checking for existence
-    'unicorn/prefer-includes': 'error',
-    // String methods startsWith/endsWith instead of more complicated stuff
-    'unicorn/prefer-starts-ends-with': 'error',
-    // textContent instead of innerText
-    'unicorn/prefer-text-content': 'error',
-    // Enforce throwing type error when throwing error while checking typeof
-    'unicorn/prefer-type-error': 'error',
-    // Use new when throwing error
-    'unicorn/throw-new-error': 'error',
-
-    'no-use-before-define': ['error', { functions: false, classes: false, variables: true }],
+    'no-use-before-define': [
+      'error',
+      { functions: false, classes: false, variables: true },
+    ],
     'eslint-comments/disable-enable-pair': 'off',
     'import/no-named-as-default-member': 'off',
     'import/no-named-as-default': 'off',
@@ -322,6 +311,26 @@ module.exports = {
         ignoreMemberSort: false,
         memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
         allowSeparatedGroups: false,
+      },
+    ],
+
+    // ts
+    '@typescript-eslint/ban-ts-ignore': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/ban-types': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
       },
     ],
 
